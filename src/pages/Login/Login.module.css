@@ -1,0 +1,108 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.loginContainer {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    font-family: 'DM Sans';
+}
+
+.loginLeftContainer {
+    width: 52%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 7vw;
+    padding-right: 7vw;
+
+}
+
+.loginLeftContainer h3 {
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 144.02%;
+}
+
+.loginLeftContainer p {
+    font-size: 21px;
+    font-weight: 500;
+    line-height: 30px;
+    letter-spacing: 0em;
+    color: #525252;
+}
+.errorToggleLoginPage{
+    color: red;
+}
+.inputBox {
+    margin: 5vh auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.inputBox input {
+    width: 38vw;
+    height: 8vh;
+    padding-left: 1vw;
+    border: 2px solid #C2C2C2;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 29px;
+    letter-spacing: 0em;
+}
+
+/* Button */
+.loginPageFalseBtn {
+    cursor: pointer;
+    width: 11vw;
+    height: 5.5vh;
+    color: #fff;
+    background-color: #ed8f8f;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 40px;
+    letter-spacing: 0em;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 1.5vh;
+}
+.loginPageTrueBtn {
+    cursor: pointer;
+    width: 11vw;
+    height: 5.5vh;
+    color: #fff;
+    background-color: #ED5353;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 40px;
+    letter-spacing: 0em;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 1.5vh;
+}
+
+/* Right Container */
+/* .loginRightContainer {
+    width: 100%;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+}
+
+.loginRightContainer h2 {
+    margin-top: 5vh;
+    position: absolute;
+    font-size: 35px;
+    font-weight: 500;
+    line-height: 58px;
+    letter-spacing: 0em;
+    color: #fff;
+} */

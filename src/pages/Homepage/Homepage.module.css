@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'DM Sans';
+}
+
+/* Input Box */
+
+.mainFirstContainer {
+    margin-top: 3vh;
+    width: 75vw;
+    height: 100%;
+    padding: 2.5vh 5vw;
+    box-shadow: 0px 0px 22px 4px rgba(255, 32, 32, 0.25);
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inputBox input {
+    border: 1.8px solid #E3E3E3;
+    border-radius: 9px;
+    width: 100%;
+    height: 5.5vh;
+    padding-left: 1.5vw;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 144.02%;
+    color: #9C9C9C;
+
+}
+
+.dropDownBox {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 2vh;
+}
+
+.dropDownBoxLeft {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5vw;
+}
+
+.dropDownBox select {
+    width: 7vw;
+    height: 4vh;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #9C9C9C;
+    text-align: center;
+    border: 2px solid #CECECE;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+.coursesTagBox {
+    width: 39vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.coursesTagBoxTop {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75vw;
+}
+
+.coursesTagBoxBottom {
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 1vw;
+    padding-top: .65vw;
+
+}
+
+.coursesTag {
+    width: 7vw;
+    height: 4vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 5px;
+    padding-left: 5px;
+    background: #FFEEEE;
+    border-radius: 2px;
+}
+
+.dropDownBoxLeft .coursesTag p {
+    width: 100%;
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 144.02%;
+    color: #000000;
+    text-align: center;
+}
+
+.coursesTag span {
+    cursor: pointer;
+    width: 2.5vw;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background-color: #FF6B6B;
+    border-radius: 0px 2px 2px 0px;
+}
+
+.coursesTag span:hover {
+    color: red;
+}
+
+.clearBtn {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 144.02%;
+    cursor: pointer;
+    color: #ED5353;
+}
+
+.clearBtn:hover {
+    border-bottom: 2px solid #ED5353;
+}
+
+.addJobBtn {
+    width: 8.5vw;
+    height: 4.5vh;
+    background: #ED5353;
+    border-radius: 8.06897px;
+    border: none;
+    cursor: pointer;
+    border-radius: 3.9223px;
+    font-weight: 500;
+    font-size: 18.5px;
+    line-height: 26px;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+/* Second container staart here */
+.mainSecondContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vh;
+    margin-top: 6.5vh;
+}

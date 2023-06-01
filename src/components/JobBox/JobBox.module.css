@@ -1,0 +1,109 @@
+.mainSecondContainerBox {
+    width: 75vw;
+    height: 16vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 2vh;
+    padding-top: 3vh;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    box-shadow: 0px 0px 22px 2px rgba(255, 32, 32, 0.25);
+}
+
+/* --------------------------------Left Side----------------------- */
+.jobDetailsLeftBox {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5vw;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+}
+
+#companyLogo {
+    margin-top: 5px;
+}
+
+.jobDetailsInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vh;
+}
+
+.jobDetails {
+    display: flex;
+    gap: 1vw;
+    color: #9C9C9C;
+}
+
+.jobDetailsTags {
+    display: flex;
+    align-items: center;
+    gap: .60vw;
+}
+
+.jobDetailsTags img {
+    width: 28px;
+    height: 23px;
+}
+
+.typeDetails {
+    display: flex;
+    gap: 1.5vw;
+    line-height: 89.19%;
+    color: #ED5353;
+}
+
+/* --------------------------------Right Side----------------------- */
+
+
+.jobDetailsRightBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 3vh;
+    align-items: flex-end;
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 500;
+}
+
+.skillsList {
+    display: flex;
+    gap: 1vw;
+    list-style: none;
+}
+
+.skillsList li {
+    width: 5.75vw;
+    height: 3.5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFEEEE;
+    border-radius: 1.43339px;
+}
+
+.skillsButton button {
+    width: 8vw;
+    height: 4vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ED5353;
+    cursor: pointer;
+    border-radius: 3.9223px;
+    font-size: 17px;
+    line-height: 144.02%;
+}
+
+.skillsButton {
+    display: flex;
+    gap: 1vw;
+}
+
+.viewDetailsButton {
+    background-color: #ED5353;
+    color: #FFFFFF;
+}

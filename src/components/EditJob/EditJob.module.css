@@ -1,0 +1,17 @@
+.jobEditButton:hover {
+    background-color: #ED5353;
+    color: #fff;
+}
+.jobEditButton {
+    color: #ED5353;
+    width: 8vw;
+    height: 4vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ED5353;
+    cursor: pointer;
+    border-radius: 3.9223px;
+    font-size: 17px;
+    line-height: 144.02%;
+}
