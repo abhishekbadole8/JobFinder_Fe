@@ -1,38 +1,39 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Styles from "./Login.module.css"
 import MainImage from "../../components/MainImage/MainImage";
-
 import client from "../../axiosClient"
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 function Login() {
 
     const navigate = useNavigate()
 
-    const [inputData, setInputData] = useState({ email: "", password: "" })
-    const [notValid, setnotValid] = useState(false)
+    // User Login Input
+    const [userLoginInput, setUserLoginInput] = useState({
+        email: "",
+        password: "",
+    });
 
     const handelInput = (e) => {
-        setInputData({ ...inputData, [e.target.name]: e.target.value })
-    }
-
-    const handelSubmit = async (e) => {
         e.preventDefault()
-        const response = await client.post(`api/users/login`, inputData)
-
-        localStorage.setItem("User_Details", JSON.stringify(response.data))
-
-        if (response.status == 200) {
-            navigate("/Homepage")
-        }
-        if (response.status == 404) {
-            setnotValid(true)
-        }
+        setUserLoginInput({ ...userLoginInput, [e.target.name]: e.target.value })
     }
 
-    // const navigateToHome = () => {
-    //     navigate("/Homepage")
-    // }
+    // POST fetch login
+    const fetchLogin = async () => {
+        try {
+            const response = await client.post(`api/user/login`, { ...userLoginInput })
+            if (response.status == 200) {
+                const user = await response.data
+                if (user) {
+                    localStorage.setItem('user_auth_token', JSON.stringify(user))
+                    navigate('/homepage')
+                }
+            }
+        } catch (error) {
+            console.log('Login Error', error);
+        }
+    }
 
     return (
         <div className={Styles.loginContainer}>
@@ -46,17 +47,19 @@ function Login() {
                 </div>
 
                 <div className={Styles.inputBox}>
-                    <input type="email" name="email" value={inputData.email} onChange={handelInput} placeholder="Email" />
-                    <input type="password" name="password" value={inputData.password} onChange={handelInput} id="" placeholder="password" />
-                    {notValid === true ? <h4 className={Styles.errorToggleLoginPage}>Email Or Password Is Invalid !!!</h4> : ""}
+
+                    <input type="email" name="email" value={userLoginInput.email} onChange={handelInput} placeholder="Email" />
+                    <input type="password" name="password" value={userLoginInput.password} onChange={handelInput} id="" placeholder="password" />
                 </div>
 
-                {(inputData.email != "" && inputData.password != "") ?
-                    <button onClick={handelSubmit} className={Styles.loginPageTrueBtn}>Sign in</button> :
-                    <button className={Styles.loginPageFalseBtn}>Sign in</button>
+                {userLoginInput.email && userLoginInput.password ?
+
+                    <button className={Styles.loginPageTrueBtn} onClick={() => fetchLogin(userLoginInput.email, userLoginInput.password)} >Sign in</button> :
+
+                    <button className={Styles.loginPageFalseBtn} >Sign in</button>
                 }
 
-                <p>Dont have an account? <span><a href="/register">Sign Up</a></span></p>
+                <p>Dont have an account? <span><a href="/signup">Sign Up</a></span></p>
 
             </div>
 

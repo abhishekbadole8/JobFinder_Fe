@@ -1,5 +1,5 @@
 import Styles from "./MainImage.module.css"
-import man from "../../assets/man.svg"
+import man from "../../assets/man.webp"
 
 function MainImage() {
     return (

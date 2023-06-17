@@ -1,18 +1,28 @@
 import { useLocation } from "react-router-dom";
-import EditJob from "../../components/EditJob/EditJob";
 import Navbar from "../../components/Navbar/Navbar";
 import Styles from "./Viewdetails.module.css"
+import EditJob from "../../components/EditJob/EditJob"
+import { useContext } from "react";
+import UserContext from "../../UserContext";
 
-function Viewdetails({navigateAddJob}) {
+function Viewdetails() {
+
     const location = useLocation()
-    console.log(location);
+
+    const { userAuthToken, userId } = useContext(UserContext)
+
+    const job = location.state.job
+
     return (
         < div className={Styles.viewDetailsmain}>
+
             <Navbar />
+
             <div className={Styles.ViewDetailsMainContainer}>
+
                 {/* First Box Title */}
                 <div className={Styles.jobTitle}>
-                    <h3>WordPress Development work from home job/internship at Adyaka Infosec Private Limited</h3>
+                    <h3>{job.company_name}</h3>
                 </div>
 
                 {/* Second Box Job Descrription */}
@@ -20,23 +30,27 @@ function Viewdetails({navigateAddJob}) {
 
                     <div className={Styles.jobDetailFirstLayer}>
                         <span>1w ago</span>
-                        <span>Full Time</span>
+                        <span>{job.job_type}</span>
                     </div>
 
                     <div className={Styles.jobDetailSecondLayer}>
 
                         <div>
-                            <h2>WordPress Development </h2>
+                            <h2>{job.job_position} </h2>
 
                             <div className={Styles.locationDetails}>
-                                <span>Bangalore</span>
+                                <span>{job.location}</span>
                                 <span>|</span>
                                 <span>India</span>
                             </div>
                         </div>
-                        
-                        <EditJob onClick={navigateAddJob}/>
-                     
+
+                        {/* Show Edit Button to verified user */}
+                        {userAuthToken && job.user_id === userId &&
+                            <EditJob job={job} />
+                        }
+
+
                     </div>
 
                     <div className={Styles.jobDetailThirdLayer}>
@@ -47,7 +61,7 @@ function Viewdetails({navigateAddJob}) {
                                 <img src="" alt="" />
                                 <span>Stipend</span>
                             </div>
-                            <p>Rs 25000/month</p>
+                            <p>Rs {job.monthly_salary}/month</p>
 
                         </div>
 
@@ -69,29 +83,26 @@ function Viewdetails({navigateAddJob}) {
                             {/* About Company */}
                             <li>
                                 <h5>About company</h5>
-                                <p>We provide technology-based services to help businesses and organizations achieve their goals. We offer a wide range of services, including software development, system integration, network and security services, cloud computing, and data analytics. Our primary focus is on leveraging technology to streamline business processes, improve productivity, and enhance overall efficiency.</p>
+                                <p>{job.about_company}</p>
                             </li>
+
                             {/* About job */}
                             <li>
                                 <h5>About the  job/internship</h5>
-                                <p>We are looking for a responsible PHP/WordPress/Laravel/Shopify Developer. He/She will be liable for managing services and therefore the interchange of knowledge between the server and the users. The candidate's primary focus is going to be the event of all server-side logic, definition, and maintenance of the central database and ensuring high performance and responsiveness to requests from the front end.
-
-                                    Selected intern's day-to-day responsibilities include:
-                                    1. Work on the development of theme customization, liquid programming language, and corresponding apps
-                                    2. Implement system integrations that are crucial to our success
-                                    3. Contribute to the development of HTML5/CSS/JavaScript and standard web technologies integral to building seamless multi-channel experiences
-                                    4. Work on speed optimization and making a mobile-friendly website</p>
+                                <p>{job.job_description}</p>
                             </li>
+
                             {/* Skills */}
                             <li>
                                 <h5>Skill(s) required</h5>
 
                                 <div className={Styles.jobSkillsTags}>
-                                    <span>CSS</span>
-                                    <span>HTMl</span>
-                                    <span>WordPress</span>
+                                    {job.skills.map((skill) => {
+                                        return <span>{skill}</span>
+                                    })}
                                 </div>
                             </li>
+
                             {/* additional info. */}
                             <li>
                                 <h5>Additional Information</h5>
@@ -99,7 +110,10 @@ function Viewdetails({navigateAddJob}) {
                             </li>
                         </ul>
                     </div>
+
                 </div>
+
+
             </div>
 
         </div>

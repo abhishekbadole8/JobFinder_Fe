@@ -1,0 +1,15 @@
+
+.filterskills {
+    width: 7vw;
+    height: 4vh;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #9C9C9C;
+    text-align: center;
+    border: 2px solid #CECECE;
+    border-radius: 9px;
+    cursor: pointer;
+}

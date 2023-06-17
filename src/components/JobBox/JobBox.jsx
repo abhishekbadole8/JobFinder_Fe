@@ -1,21 +1,17 @@
 import { useNavigate } from "react-router-dom"
-
 import Styles from "./JobBox.module.css"
-import first_company from "../../assets/first_company.svg"
-import flag from "../../assets/flag.svg"
+import flag from "../../assets/flag.webp"
 import { FaUserFriends } from "react-icons/fa";
 import { BsCurrencyRupee } from "react-icons/bs";
+import { useEffect, useState } from "react";
 import EditJob from "../EditJob/EditJob";
 
-function JobBox({ job,  navigateAddJob }) {
+function JobBox({ job, userId, userAuthToken }) {
 
     const navigate = useNavigate()
+    // const [editJob, setEditJob] = useState() // Here Job to edit
 
-    const { _id, job_position, monthly_salary, location, remote_office, job_type } = job
-
-    const navigateViewDetails = () => {
-        navigate('/viewdetails')
-    }
+    const { _id, user_id, logo_url, job_position, monthly_salary, location, remote_office, job_type } = job
 
     return (
 
@@ -23,10 +19,11 @@ function JobBox({ job,  navigateAddJob }) {
 
             {/* ----------------------------------------- Left Side ----------------------------------------- */}
             <div className={Styles.jobDetailsLeftBox}>
-                <img src={first_company} alt="company-logo" id={Styles.companyLogo} />
+
+                <img src={logo_url} alt="company-logo" id={Styles.companyLogo} />
 
                 <div className={Styles.jobDetailsInfo}>
-                    
+
                     {/* Job Title */}
                     <p>{job_position}</p>
 
@@ -66,17 +63,21 @@ function JobBox({ job,  navigateAddJob }) {
                 </div>
 
                 <div className={Styles.skillsButton}>
-                    {"" === null ?
-                        <button className={Styles.viewDetailsButton} onClick={navigateViewDetails}>View details</button> :
-                        <>
-                            <EditJob onClick={navigateAddJob} />
-                            <button className={Styles.viewDetailsButton} onClick={navigateViewDetails}>View details</button>
-                        </>}
+
+                    {/* Edit Button */}
+                    {userAuthToken && user_id === userId &&
+                        // < button className={Styles.jobEditButton} onClick={() => handleEditJob(job)}>Edit Job</button>
+                        <EditJob job={job} />
+                    }
+
+                    {/* View Detail Button */}
+                    <button className={Styles.viewDetailsButton} onClick={() => navigate('/viewdetails', { state: { job } })}>View details</button>
+
                 </div>
 
             </div>
 
-        </div>
+        </div >
 
     )
 }

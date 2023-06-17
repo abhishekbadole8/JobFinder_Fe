@@ -1,73 +1,69 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import Styles from "./Homepage.module.css"
 import Navbar from "../../components/Navbar/Navbar"
 import client from "../../axiosClient"
 import JobBox from "../../components/JobBox/JobBox";
+import UserContext from "../../UserContext"
+import FilterSkills from "../../components/FilterSkills/FilterSkills"
 
 function Homepage() {
     const navigate = useNavigate()
-    const [localStore, setLocalStore] = useState()
 
-    const skillsList = ['HTML', 'CSS', 'Javascript', 'Nodejs'] //Array of Skills 
-    const [skillTag, setskillTag] = useState([]) // Store Skill Tag
+    const { userAuthToken, setUserAuthToken, userId } = useContext(UserContext)
 
-    const [jobsBox, setJobsBox] = useState()// Here Api Jobs are Store
+    const [skillsTag, setSkillsTag] = useState([]) // Store Selected Skill Tag
+    const [jobsList, setJobsList] = useState([]) // Here Api Jobs are Store
 
-    const authToken = JSON.parse(localStorage.getItem('User_Details'))
-    const headers = { Authorization: `Bearer ${authToken.AccessToken}` }
+    // Jobs Render Effect
 
-    const navigateAddJob = () => {
-        navigate('/addjob', { state: headers })
-    }
-
-    // Fetch Job from api and show in Boxes
+    // fetch Jobs
     const fetchJobs = async () => {
         try {
-            const response = await client.get(`/api/jobs`)
-            setJobsBox(response.data)
-
+            let response;
+            if (skillsTag.length > 0) {
+                response = await client.get('/api/job/', {
+                    params: { skills: skillsTag.join(",") }
+                })
+            } else {
+                response = await client.get(`/api/job/`)
+            }
+            if (response.status === 200) {
+                const data = response.data
+                if (data) {
+                    setJobsList(response.data)
+                }
+            }
         } catch (error) {
-            alert(`Error Loading Jobs: ${error}`)
+            console.log('Jobs Fetching Error', error);
         }
     }
 
-    // Set DropDown Value to State
-    const dropDownSkill = (e) => {
-        e.preventDefault()
-        const value = e.target.value
-        setskillTag((pre) => [...pre, value])
-    }
+
     // Remove Skill Tag
     const handelRemove = (index) => {
-        setskillTag((prevSkills) => {
+        setSkillsTag((prevSkills) => {
             const newSkills = [...prevSkills]
             newSkills.splice(index, 1)
             return newSkills
         })
     }
 
-    //Clear All Button
+    // Clear All Button
     const handelClearAll = () => {
-        const allClear = skillTag.splice(0, skillTag.length)
-        setskillTag()
+        const allClear = skillsTag.splice(0, skillsTag.length)
+        setSkillsTag([])
     }
-    // const handleShowJob = async (job) => {
-    //     const mappingSkills = await jobsBox.map((ele) => {
-    //         const eleArray = ele.skills
 
-    //         const updatedSkill = eleArray.map((x) => {               
-    //             console.log("return",x === ele);
+    // Handle Search Title Input
+    const handleInput = (e) => {
+        const value = e.target.value;
 
-    //         })
-    //     })
-    // }
+    };
 
     useEffect(() => {
-        setLocalStore(JSON.parse(localStorage.getItem("User_Details")))
         fetchJobs()
-        // handleShowJob(jobsBox)
-    }, [skillTag])
+    }, [skillsTag])
 
     return (
         <>
@@ -80,28 +76,23 @@ function Homepage() {
                 <div className={Styles.mainFirstContainer}>
 
                     <div className={Styles.inputBox}>
-                        <input type="text" placeholder="Type any job title" />
+                        <input type="text" placeholder="Type any job title" onChange={(e) => handleInput(e)} />
                     </div>
 
                     <div className={Styles.dropDownBox}>
-                        {/* Dropdown Here */}
-                        <div className={Styles.dropDownBoxLeft}>
 
-                            <select name="skillTag" onChange={dropDownSkill}>
-                                {skillsList.map((val, i) => (
-                                    <option value={val} key={i}>{val}</option>
-                                ))}
-                            </select>
+                        <div className={Styles.dropDownBoxLeft}>
+                            {/* Dropdown Here */}
+                            <FilterSkills skillsTag={skillsTag} setSkillsTag={setSkillsTag} skills={jobsList ? jobsList.map((skill) => skill.skills) : []} />
 
                             <div className={Styles.coursesTagBox}>
                                 <div className={Styles.coursesTagBoxTop}>
 
                                     {/* Skill Tags */}
-
-                                    {skillTag !== undefined ? skillTag.map((val, i) => {
+                                    {skillsTag !== undefined ? skillsTag.map((skill, i) => {
                                         return (
                                             <div className={Styles.coursesTag} key={i} >
-                                                <p>{val}</p>
+                                                <p>{skill}</p>
                                                 <span onClick={() => handelRemove(i)}>X</span>
                                             </div>
                                         )
@@ -110,32 +101,37 @@ function Homepage() {
 
                                 </div>
 
-                                <div className={Styles.coursesTagBoxBottom}>
-                                    <p className={Styles.clearBtn} onClick={handelClearAll}>Clear</p>
-                                </div>
+                                {userAuthToken &&
+                                    <div className={Styles.coursesTagBoxBottom}>
+                                        <p className={Styles.clearBtn} onClick={handelClearAll}>Clear</p>
+                                    </div>}
+
                             </div>
 
                         </div>
 
                         {/* Search Container Right Side */}
-                        <div className={Styles.dropDownBoxRight}>
-                            <button className={Styles.addJobBtn} onClick={navigateAddJob}>+ Add Job</button>
-                        </div>
-                        
+                        {userAuthToken ?
+                            //when user is logged in
+                            <div className={Styles.dropDownBoxRight}>
+                                <button className={Styles.addJobBtn} onClick={() => navigate('/addjob')}>+ Add Job</button>
+                            </div> :
+                            // if user is not logged in
+                            <div className={Styles.coursesTagBoxBottom}>
+                                <p className={Styles.clearBtn} onClick={handelClearAll}>Clear</p>
+                            </div>
+                        }
+
                     </div>
                 </div>
+
 
                 {/* Second Container Start here */}
                 <div className={Styles.mainSecondContainer}>
 
-                    {/* Map */}
-                    {jobsBox !== undefined ?
-
-                        jobsBox.map((job) => {
-
-                            return (
-                                <JobBox job={job} navigateAddJob={navigateAddJob} />
-                            )
+                    {(jobsList !== undefined) ?
+                        jobsList.map((job) => {
+                            return <JobBox job={job} userId={userId} userAuthToken={userAuthToken} key={job._id} />
                         })
                         : "Loading....."
                     }

@@ -22,7 +22,9 @@
 }
 
 #companyLogo {
+    width: 3.4vw;
     margin-top: 5px;
+    border-radius: 12.5731px;
 }
 
 .jobDetailsInfo {
@@ -107,3 +109,4 @@
     background-color: #ED5353;
     color: #FFFFFF;
 }
+
