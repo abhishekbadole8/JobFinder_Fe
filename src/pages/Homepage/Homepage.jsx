@@ -15,8 +15,6 @@ function Homepage() {
     const [skillsTag, setSkillsTag] = useState([]) // Store Selected Skill Tag
     const [jobsList, setJobsList] = useState([]) // Here Api Jobs are Store
 
-    // Jobs Render Effect
-
     // fetch Jobs
     const fetchJobs = async () => {
         try {
@@ -51,7 +49,7 @@ function Homepage() {
 
     // Clear All Button
     const handelClearAll = () => {
-        const allClear = skillsTag.splice(0, skillsTag.length)
+        // const allClear = skillsTag.splice(0, skillsTag.length)
         setSkillsTag([])
     }
 
@@ -64,6 +62,8 @@ function Homepage() {
     useEffect(() => {
         fetchJobs()
     }, [skillsTag])
+
+
 
     return (
         <>
@@ -139,6 +139,7 @@ function Homepage() {
                 </div>
 
             </section>
+
         </>
     )
 }

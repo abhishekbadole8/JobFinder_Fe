@@ -11,8 +11,9 @@ function AddJob() {
     const location = useLocation()
 
     const { userAuthToken, setUserAuthToken } = useContext(UserContext)
-    const { type, selectedJob } = location.state
-    
+
+    const { type, selectedJob } = location.state == null ? "" : location.state
+
     // add/edit Job Input
     const [jobInput, setJobInput] = useState({
         company_name: "", logo_url: "", job_position: "", monthly_salary: "", job_type: "",
@@ -162,6 +163,7 @@ function AddJob() {
                 <img src={addJobbackImg} alt="man" />
                 <h2>Recruiter add job details here</h2>
             </div>
+            
         </div>
 
     )

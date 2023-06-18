@@ -46,9 +46,11 @@ function Register() {
         <div className={Styles.registerContainer}>
 
             <div className={Styles.registerLeftContainer}>
-
-                <h3>Create an account</h3>
-                <p>Your personal job finder is here</p>
+                
+                <div>
+                    <h3>Create an account</h3>
+                    <p>Your personal job finder is here</p>
+                </div>
 
                 <div className={Styles.inputBox}>
                     <input type="text" name="name" value={userSignupInput.name} onChange={handleInput} placeholder="Name" />

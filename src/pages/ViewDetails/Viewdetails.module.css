@@ -11,14 +11,13 @@
 
 .ViewDetailsMainContainer {
     position: absolute;
-    margin-top: 10vh;
+    margin-top: 8vh;
+    padding: 0 2vw;
 }
 
 .jobTitle {
-    width: 77vw;
-    height: 16vh;
-    padding-left: 3.5vw;
-    padding-right: 3.5vw;
+    width: 100%;
+    padding: 2.5vh 3.5vw;
     background-color: #fff;
     box-shadow: 0px 4px 23px 2px rgba(0, 0, 0, 0.1);
     font-weight: 500;
@@ -136,8 +135,8 @@
 }
 
 .jobSkillsTags span {
-    width: 7.5vw;
-    height: 4vh;
+    /* width: 7.5vw;
+    height: 4vh; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -145,4 +144,64 @@
     padding-right: .5vw;
     background-color: #FFEEEE;
     border-radius: 21px;
+}
+
+@media only screen and (max-width:850px) {
+    .ViewDetailsMainContainer {
+        margin-top: 8vh;
+        padding: 0 7%;
+
+    }
+
+    .jobTitle {
+        width: 100%;
+        padding: 1.5vh 1vw;
+        font-size: 1.2rem;
+    }
+
+    .jobTitle h3 {
+        font-size: 1.4rem;
+    }
+
+    .jobDetailInfo {
+        width: 100%;
+        gap: 1.5vh;
+    }
+
+    .jobDetailFirstLayer {
+        font-size: 1.1rem;
+    }
+
+    .jobDetailSecondLayer h2 {
+        font-size: 1.3rem;
+        margin-bottom: .5vh;
+    }
+
+    .locationDetails {
+        padding: 0 1vw;
+        font-size: 1rem;
+    }
+
+    .jobDetailInfoList ul {
+        gap: 3vh;
+    }
+
+    .jobDetailThirdLayer {
+        gap: 3vw;
+    }
+
+    .jobDetailInfoList h5 {
+        font-size: 1.3rem;
+        line-height: 130%;
+    }
+
+    .jobDetailInfoList p {
+        font-size: 1.2rem;
+        line-height: 130%;
+    }
+
+    .jobSkillsTags span {
+        padding: 0 3.5vw;
+        font-size: 1.05rem;
+    }
 }

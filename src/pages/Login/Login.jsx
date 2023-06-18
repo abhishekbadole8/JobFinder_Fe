@@ -54,7 +54,7 @@ function Login() {
 
                 {userLoginInput.email && userLoginInput.password ?
 
-                    <button className={Styles.loginPageTrueBtn} onClick={() => fetchLogin(userLoginInput.email, userLoginInput.password)} >Sign in</button> :
+                    <button className={Styles.loginPageTrueBtn} onClick={() => fetchLogin(userLoginInput)} >Sign in</button> :
 
                     <button className={Styles.loginPageFalseBtn} >Sign in</button>
                 }

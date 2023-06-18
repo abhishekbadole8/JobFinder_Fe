@@ -17,9 +17,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 25vh 6vw;
-    /* padding-left: 6vw;
-    padding-right: 6vw; */
+    padding: 1vh 3vw;
 }
 
 .addJobLeftContainer h4 {
@@ -37,10 +35,10 @@
 }
 
 .addJobInputBox {
-    margin: 4vh 2vw;
+    margin: 4vh 0;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 1.25vh;
 }
 
 .addJobInputBox .jobInfoInput {
@@ -51,8 +49,8 @@
 
 .jobInfoInput input,
 .jobInfoInput select {
-    width: 25vw;
-    height: 6vh;
+    width: 70%;
+    height: 6vh; 
     padding-left: 1vw;
     border: 1.84131px solid #C2C2C2;
     border-radius: 4.60328px;
@@ -72,11 +70,10 @@
 
 .addJobsButtons button {
     cursor: pointer;
-    width: 11vw;
-    height: 5.5vh;
+    padding: .55vh 2vw;
     font-size: 22px;
     font-weight: 700;
-    line-height: 40px;
+    /* line-height: 40px; */
     letter-spacing: 0em;
     text-align: center;
     border-radius: 5px;
@@ -111,7 +108,7 @@
 /* Right Container  */
 .addJobRightContainer {
     width: 45%;
-    background-color: red;
+    background-color: black;
     display: flex;
     justify-content: center;
 }
@@ -124,4 +121,40 @@
     line-height: 58px;
     letter-spacing: 0em;
     color: #fff;
+}
+
+@media only screen and (max-width:850px) {
+
+    /* Right SIde image */
+    .addJobRightContainer {
+        display: none;
+    }
+
+    .addJobLeftContainer {
+        width: 100%;
+        padding: 1vh 5vw;
+    }
+
+    .addJobLeftContainer h4 {
+        font-size: 1.55rem;
+    }
+
+    .addJobLeftContainer h3 {
+        font-size: 1.05rem;
+    }
+
+    .jobInfoInput input,
+    .jobInfoInput select {
+        width: 55%;
+        padding: 1vh 2vw;
+    }
+
+    .addJobsButtons {
+        gap: 2.5vw;
+    }
+
+    .addJobsButtons button {
+        font-size: 1.1rem;
+        padding: 1vh 2.5vw;
+    }
 }

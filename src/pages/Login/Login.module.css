@@ -17,9 +17,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-left: 7vw;
-    padding-right: 7vw;
-
+    padding: 0 7vw;
 }
 
 .loginLeftContainer h3 {
@@ -35,9 +33,11 @@
     letter-spacing: 0em;
     color: #525252;
 }
-.errorToggleLoginPage{
+
+.errorToggleLoginPage {
     color: red;
 }
+
 .inputBox {
     margin: 5vh auto;
     display: flex;
@@ -73,6 +73,7 @@
     border-radius: 5px;
     margin-bottom: 1.5vh;
 }
+
 .loginPageTrueBtn {
     cursor: pointer;
     width: 11vw;
@@ -89,20 +90,37 @@
     margin-bottom: 1.5vh;
 }
 
-/* Right Container */
-/* .loginRightContainer {
-    width: 100%;
-    background-color: red;
-    display: flex;
-    justify-content: center;
-}
+@media only screen and (max-width:850px) {
 
-.loginRightContainer h2 {
-    margin-top: 5vh;
-    position: absolute;
-    font-size: 35px;
-    font-weight: 500;
-    line-height: 58px;
-    letter-spacing: 0em;
-    color: #fff;
-} */
+    .loginLeftContainer {
+        width: 100%;
+        padding: 0 4vw;
+        gap: 4vh;
+    }
+
+    .loginLeftContainer h3 {
+        font-size: 1.7rem;
+    }
+
+    .loginLeftContainer p {
+        font-size: 1.2rem;
+    }
+
+    .inputBox {
+        margin: 1vh 0;
+        flex-direction: column;
+        gap: 3vh;
+    }
+
+    .inputBox input {
+        width: 100%;
+        padding-left: 1.6vw;
+    }
+
+    .loginPageFalseBtn,
+    .loginPageTrueBtn {
+        width: 100%;
+        margin: 0;
+    }
+
+}

@@ -4,10 +4,12 @@
     display: flex;
     justify-content: center;
 }
-.loginRightContainer img{
+
+.loginRightContainer img {
     width: 100%;
     height: 100%;
 }
+
 .loginRightContainer h2 {
     margin-top: 5vh;
     position: absolute;
@@ -16,4 +18,10 @@
     line-height: 58px;
     letter-spacing: 0em;
     color: #fff;
+}
+
+@media only screen and (max-width:850px) {
+    .loginRightContainer {
+        display: none;
+    }
 }

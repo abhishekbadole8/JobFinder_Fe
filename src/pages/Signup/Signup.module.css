@@ -17,9 +17,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-left: 7vw;
-    padding-right: 7vw;
-
+    padding: 0 7vw;
 }
 
 .registerLeftContainer h3 {
@@ -54,23 +52,26 @@
     line-height: 29px;
     letter-spacing: 0em;
 }
-.checkBox{
+
+.checkBox {
     display: flex;
     gap: 10px;
-    margin-bottom:2vh ;
+    margin-bottom: 2vh;
     display: flex;
     align-items: center;
 }
-.checkBox input{
+
+.checkBox input {
     width: 17px;
     height: 17px;
-    
 }
-.checkBox p{
+
+.checkBox p {
     font-size: 17px;
 }
+
 /* Button */
-.registerPageFalseBtn{
+.registerPageFalseBtn {
     cursor: pointer;
     width: 13vw;
     height: 5.5vh;
@@ -85,6 +86,7 @@
     border-radius: 5px;
     margin-bottom: 1.5vh;
 }
+
 .registerPageTrueBtn {
     cursor: pointer;
     width: 13vw;
@@ -99,4 +101,50 @@
     border: none;
     border-radius: 5px;
     margin-bottom: 1.5vh;
+}
+
+@media only screen and (max-width:850px) {
+
+    .registerLeftContainer {
+        width: 100%;
+        padding: 0 4vw;
+        gap: 2vh;
+    }
+
+    .registerLeftContainer h3 {
+        font-size: 1.7rem;
+    }
+
+    .registerLeftContainer p {
+        font-size: 1.2rem;
+        line-height: 25px;
+    }
+
+    .inputBox {
+        margin: 2vh 0;
+        flex-direction: column;
+        gap: 2vh;
+    }
+
+    .inputBox input {
+        width: 100%;
+        padding-left: 1.6vw;
+    }
+
+    .checkBox {
+        gap: 5px;
+        align-items: flex-start;
+    }
+
+    .checkBox input {
+        margin-top: 1vh;
+        width: 50px;
+    }
+
+    .registerPageFalseBtn,
+    .registerPageTrueBtn {
+        width: 100%;
+        margin-bottom: 1vh;
+    }
+
 }

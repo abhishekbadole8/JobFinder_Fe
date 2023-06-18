@@ -7,7 +7,7 @@
 
 header {
     width: 100%;
-    height: 13vh;
+    height: 11vh;
     background-color: #ED5353;
     border-radius: 0px 0px 62px 55px;
     display: flex;
@@ -32,7 +32,6 @@ header {
     position: absolute;
 }
 
-
 /* Login Register button csss */
 .authButton {
     display: flex;
@@ -40,8 +39,9 @@ header {
 }
 
 .authButton button {
-    width: 6vw;
-    height: 5vh;
+    /* width: 6vw;
+    height: 5vh; */
+    padding: 0 1vw;
     background-color: #FF6B6B;
     color: #FFFFFF;
     border: 2px solid #FFFFFF;
@@ -87,4 +87,20 @@ header {
 .authDetail img {
     width: 50px;
     height: 50px;
+}
+
+@media only screen and (max-width:850px) {
+    header {
+        width: 100%;
+        height: 9vh;
+        border-radius: 0px 0px 55px 55px;
+    }
+
+    .logo {
+        padding-left: 1vw;
+    }
+
+    .authButton button {
+        padding: .1vh .75vw;
+    }
 }
