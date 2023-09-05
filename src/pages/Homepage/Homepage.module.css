@@ -192,4 +192,7 @@ section {
         width: 100%;
         gap: 1vh;
     }
+.mainSecondContainerBox{
+width:100%;
+}
 }
