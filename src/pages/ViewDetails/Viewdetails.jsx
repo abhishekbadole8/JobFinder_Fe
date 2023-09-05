@@ -3,7 +3,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Styles from "./Viewdetails.module.css"
 import EditJob from "../../components/EditJob/EditJob"
 import { useContext } from "react";
-import UserContext from "../../UserContext";
+import { UserContext } from "../../App";
 
 function Viewdetails() {
 

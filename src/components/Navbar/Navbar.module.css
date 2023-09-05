@@ -39,8 +39,6 @@ header {
 }
 
 .authButton button {
-    /* width: 6vw;
-    height: 5vh; */
     padding: 0 1vw;
     background-color: #FF6B6B;
     color: #FFFFFF;
@@ -67,6 +65,10 @@ header {
     font-weight: 500;
     font-size: 17px;
     line-height: 144.02%;
+}
+
+.authDetail p {
+    font-weight: 700;
 }
 
 .authDetail button {

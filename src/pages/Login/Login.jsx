@@ -1,37 +1,55 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import Styles from "./Login.module.css"
 import MainImage from "../../components/MainImage/MainImage";
-import client from "../../axiosClient"
+import axios from "axios";
+import { UserContext } from "../../App";
 
 function Login() {
+    const location = useLocation()
 
     const navigate = useNavigate()
 
-    // User Login Input
-    const [userLoginInput, setUserLoginInput] = useState({
-        email: "",
-        password: "",
-    });
+    const { BASE_URL, setUserAuthToken, isLoading, setIsLoading, errorMsg, setErrorMsg } = useContext(UserContext)
+
+    const [userLoginInput, setUserLoginInput] = useState({ email: "", password: "" });
 
     const handelInput = (e) => {
         e.preventDefault()
-        setUserLoginInput({ ...userLoginInput, [e.target.name]: e.target.value })
+        setErrorMsg('')
+        setUserLoginInput((prevVal) => ({ ...prevVal, [e.target.name]: e.target.value }))
     }
 
     // POST fetch login
     const fetchLogin = async () => {
         try {
-            const response = await client.post(`api/user/login`, { ...userLoginInput })
-            if (response.status == 200) {
-                const user = await response.data
-                if (user) {
-                    localStorage.setItem('user_auth_token', JSON.stringify(user))
+            const response = await axios.post(BASE_URL + `api/user/login`, { ...userLoginInput })
+            if (response) {
+                const token = await response.data
+                if (token) {
+                    setIsLoading(false)
+                    setErrorMsg('')
+                    localStorage.setItem('user_auth_token', token)
+                    setUserAuthToken(token)
                     navigate('/homepage')
                 }
             }
         } catch (error) {
-            console.log('Login Error', error);
+            setIsLoading(false)
+            const msg = error.response.data.message
+            if (msg) {
+                setErrorMsg(msg)
+            } else {
+                console.log('Login Error', error);
+            }
+        }
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        if (!errorMsg) {
+            setIsLoading(true)
+            fetchLogin()
         }
     }
 
@@ -46,18 +64,26 @@ function Login() {
                     <p>Your personal job finder is here</p>
                 </div>
 
-                <div className={Styles.inputBox}>
+                <form onSubmit={handleSubmit}>
 
-                    <input type="email" name="email" value={userLoginInput.email} onChange={handelInput} placeholder="Email" />
-                    <input type="password" name="password" value={userLoginInput.password} onChange={handelInput} id="" placeholder="password" />
-                </div>
+                    {location.state != null && <p id={Styles.userCreatedMsg}>{location.state.msg}</p>}
 
-                {userLoginInput.email && userLoginInput.password ?
+                    <div className={Styles.inputBox}>
 
-                    <button className={Styles.loginPageTrueBtn} onClick={() => fetchLogin(userLoginInput)} >Sign in</button> :
+                        <input type="email" name="email" value={userLoginInput.email} onChange={handelInput} placeholder="Email" />
 
-                    <button className={Styles.loginPageFalseBtn} >Sign in</button>
-                }
+                        <input type="password" name="password" value={userLoginInput.password} onChange={handelInput} id="" placeholder="password" />
+                    </div>
+
+                    {errorMsg && <p id={Styles.errormsg}>{errorMsg}</p>}
+
+                    <button type="submit"
+                        className={`${isLoading ? Styles.loginPageTrueBtn : userLoginInput.email && userLoginInput.password ? Styles.loginPageTrueBtn : Styles.loginPageFalseBtn}`}
+                        disabled={isLoading || (!userLoginInput.email || !userLoginInput.password)}>
+                        {isLoading ? 'Loading...' : 'Sign in'}
+                    </button>
+
+                </form>
 
                 <p>Dont have an account? <span><a href="/signup">Sign Up</a></span></p>
 

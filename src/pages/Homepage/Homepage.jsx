@@ -2,15 +2,15 @@ import { useState, useEffect, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import Styles from "./Homepage.module.css"
 import Navbar from "../../components/Navbar/Navbar"
-import client from "../../axiosClient"
 import JobBox from "../../components/JobBox/JobBox";
-import UserContext from "../../UserContext"
 import FilterSkills from "../../components/FilterSkills/FilterSkills"
+import axios from "axios"
+import { UserContext } from "../../App";
 
 function Homepage() {
     const navigate = useNavigate()
 
-    const { userAuthToken, setUserAuthToken, userId } = useContext(UserContext)
+    const { BASE_URL, userAuthToken, userId } = useContext(UserContext)
 
     const [skillsTag, setSkillsTag] = useState([]) // Store Selected Skill Tag
     const [jobsList, setJobsList] = useState([]) // Here Api Jobs are Store
@@ -20,11 +20,11 @@ function Homepage() {
         try {
             let response;
             if (skillsTag.length > 0) {
-                response = await client.get('/api/job/', {
+                response = await axios.get(BASE_URL + 'api/job/', {
                     params: { skills: skillsTag.join(",") }
                 })
             } else {
-                response = await client.get(`/api/job/`)
+                response = await axios.get(BASE_URL + `api/job/`)
             }
             if (response.status === 200) {
                 const data = response.data
@@ -37,7 +37,6 @@ function Homepage() {
         }
     }
 
-
     // Remove Skill Tag
     const handelRemove = (index) => {
         setSkillsTag((prevSkills) => {
@@ -49,7 +48,6 @@ function Homepage() {
 
     // Clear All Button
     const handelClearAll = () => {
-        // const allClear = skillsTag.splice(0, skillsTag.length)
         setSkillsTag([])
     }
 
@@ -62,8 +60,6 @@ function Homepage() {
     useEffect(() => {
         fetchJobs()
     }, [skillsTag])
-
-
 
     return (
         <>
@@ -129,11 +125,21 @@ function Homepage() {
                 {/* Second Container Start here */}
                 <div className={Styles.mainSecondContainer}>
 
-                    {(jobsList !== undefined) ?
+                    {(jobsList.length !== 0) ?
                         jobsList.map((job) => {
                             return <JobBox job={job} userId={userId} userAuthToken={userAuthToken} key={job._id} />
                         })
-                        : "Loading....."
+                        : <>
+                            <div className={Styles.mainSecondContainerBox} >
+                                <p className={Styles.jobLoading}>Loading...</p>
+                            </div>
+                            <div className={Styles.mainSecondContainerBox} >
+                                <p className={Styles.jobLoading}>Loading...</p>
+                            </div>
+                            <div className={Styles.mainSecondContainerBox} >
+                                <p className={Styles.jobLoading}>Loading...</p>
+                            </div>
+                        </>
                     }
 
                 </div>

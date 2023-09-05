@@ -2,15 +2,15 @@ import { useContext, useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import Styles from "./AddJob.module.css"
 import addJobbackImg from "../../assets/addjobbackimg.svg"
-import client from "../../axiosClient"
-import UserContext from "../../UserContext"
+import axios from "axios"
+import { UserContext } from "../../App"
 
 function AddJob() {
 
     const navigate = useNavigate()
     const location = useLocation()
 
-    const { userAuthToken, setUserAuthToken } = useContext(UserContext)
+    const { BASE_URL, userAuthToken } = useContext(UserContext)
 
     const { type, selectedJob } = location.state == null ? "" : location.state
 
@@ -35,7 +35,7 @@ function AddJob() {
             if (selectedJob) {
                 const job_id = selectedJob._id
                 // PATCH request
-                response = await client.patch(`api/job/${job_id}`, {
+                response = await axios.patch(BASE_URL + `api/job/${job_id}`, {
                     ...jobInput
                 }, {
                     headers: {
@@ -44,7 +44,7 @@ function AddJob() {
                 })
             } else {
                 // POST request
-                response = await client.post(`api/job/add`, {
+                response = await axios.post(BASE_URL + `api/job/add`, {
                     ...jobInput
                 }, {
                     headers: {
@@ -163,7 +163,7 @@ function AddJob() {
                 <img src={addJobbackImg} alt="man" />
                 <h2>Recruiter add job details here</h2>
             </div>
-            
+
         </div>
 
     )

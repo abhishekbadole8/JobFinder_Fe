@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { createContext, useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useNavigate,
   Navigate,
 } from "react-router-dom";
 import Homepage from "./pages/Homepage/Homepage";
@@ -11,23 +10,34 @@ import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import Viewdetails from "./pages/ViewDetails/Viewdetails";
 import AddJob from "./pages/AddJob/AddJob";
-import Navbar from "./components/Navbar/Navbar";
-import UserContext from "./UserContext";
 import jwt_decode from "jwt-decode";
-function App() {
 
-  // state - LocalStorage token
-  const [userAuthToken, setUserAuthToken] = useState(
-    eval(localStorage.getItem("user_auth_token"))
-  );
+export const UserContext = createContext();
+
+function App() {
+  const BASE_URL = `https://job-finder-rddz.onrender.com/`;
+
+  const [userAuthToken, setUserAuthToken] = useState(null); // User token
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   // Decoded Token Here
   const decodedToken = userAuthToken ? jwt_decode(userAuthToken) : null;
-  const userId = decodedToken?.id // Decoded user_id
-
+  const userId = decodedToken?.id; // Decoded user_id
+console.log(userAuthToken);
   return (
     <UserContext.Provider
-      value={{ userAuthToken, setUserAuthToken, userId,decodedToken }}
+      value={{
+        BASE_URL,
+        isLoading,
+        setIsLoading,
+        errorMsg,
+        setErrorMsg,
+        userAuthToken,
+        setUserAuthToken,
+        userId,
+        decodedToken,
+      }}
     >
       <Router>
         <Routes>

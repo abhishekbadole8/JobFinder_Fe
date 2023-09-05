@@ -20,6 +20,27 @@
     padding: 0 7vw;
 }
 
+.loginLeftContainer form {
+    position: relative;
+}
+
+#errormsg,
+#userCreatedMsg {
+    font-size: 1rem;
+    font-weight: 600;
+    position: absolute;
+    margin-left: .15rem;
+}
+
+#userCreatedMsg {
+    color: green;
+}
+
+#errormsg {
+    color: red;
+    bottom: 3.65rem;
+}
+
 .loginLeftContainer h3 {
     font-weight: 700;
     font-size: 40px;
@@ -96,6 +117,32 @@
         width: 100%;
         padding: 0 4vw;
         gap: 4vh;
+    }
+
+    .loginLeftContainer form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 4vh;
+        position: relative;
+    }
+
+    #errormsg,
+    #userCreatedMsg {
+        font-size: 1rem;
+        font-weight: 600;        
+        position: absolute;
+        margin-left: .5rem;
+    }
+
+    #userCreatedMsg {
+        top: -1.75rem;
+        color: green;
+    }
+
+    #errormsg {
+        color: red;
+        bottom: 2.9rem;
     }
 
     .loginLeftContainer h3 {

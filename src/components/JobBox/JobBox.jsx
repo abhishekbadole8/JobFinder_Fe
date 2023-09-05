@@ -3,13 +3,11 @@ import Styles from "./JobBox.module.css"
 import flag from "../../assets/flag.webp"
 import { FaUserFriends } from "react-icons/fa";
 import { BsCurrencyRupee } from "react-icons/bs";
-import { useEffect, useState } from "react";
 import EditJob from "../EditJob/EditJob";
 
 function JobBox({ job, userId, userAuthToken }) {
 
     const navigate = useNavigate()
-    // const [editJob, setEditJob] = useState() // Here Job to edit
 
     const { _id, user_id, logo_url, job_position, monthly_salary, location, remote_office, job_type } = job
 
@@ -66,7 +64,6 @@ function JobBox({ job, userId, userAuthToken }) {
 
                     {/* Edit Button */}
                     {userAuthToken && user_id === userId &&
-                        // < button className={Styles.jobEditButton} onClick={() => handleEditJob(job)}>Edit Job</button>
                         <EditJob job={job} />
                     }
 

@@ -1,5 +1,5 @@
-import { useNavigate } from "react-router-dom"
 import Styles from './EditJob.module.css'
+import { useNavigate } from "react-router-dom"
 
 function EditJob({ job }) {
 
