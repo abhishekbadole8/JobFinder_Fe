@@ -27,7 +27,7 @@ function Navbar() {
                     </div> :
                     <div className={Styles.authButton}>
                         <button onClick={() => navigate('/login')} >Login</button>
-                        <button onClick={() => navigate('/register')} >Register</button>
+                        <button onClick={() => navigate('/signup')} >Register</button>
                     </div>
                 }
 
